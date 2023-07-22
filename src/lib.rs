@@ -48,7 +48,7 @@ unsafe fn check_selection_type(ctx: &InlineCtx) {
 
 // Original plan, but HDR hooks the same exact location apparently so it conflicts with that
 // #[skyline::hook(offset = 0x178a090)]
-// unsafe fn setup_stage_plus_8(
+// unsafe fn setup_stage(
 //     stage_morph_id: u64,
 //     mut stage_id: u32,
 //     ui_bgm_id: u64,
@@ -116,6 +116,7 @@ unsafe fn setup_stage_offseted(
                     Some(kind) => {
                         match MAPPED_STAGE_NUM_TO_KIND_ID.get(&selected_stage.stage_num) {
                             Some(kind_table) => {
+                                println!("{:?}", kind_table);
                                 match kind_table.get(kind) {
                                     Some(kind_stage_id) => *ctx.registers[1].w.as_mut() = *kind_stage_id,
                                     None => {}
@@ -155,6 +156,7 @@ pub fn main() {
                     }
                     MAPPED_STAGE_NUM_TO_KIND_ID.get_mut(&stage_num).unwrap().insert(STAGE_TABLE.table[x].stage_kind, STAGE_TABLE.table[x].stage_id);
                 }
+                println!("{:?}", STAGE_PARAM_CONFIG_DATA);
             }
             // install hooks
             install_hooks!(setup_stage_offseted, check_selection_type, set_selected_stage_hash);
