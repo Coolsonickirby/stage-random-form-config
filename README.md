@@ -419,3 +419,5 @@ will make it so that the following stages will have the settings applied to them
 - King of Fighters Stadium will pick only either the Normal form with the Hazard being set to whatever the ruleset has it set to or the Battlefield form
 - Dracula's Castle will only pick the Normal form with a 50% chance of Hazards being on or off
 - Town and City will only pick the Normal form with Hazards on, the Battlefield form, or the Final Destination form
+
+You can use the in-game `Random Stage Selection` menu to limit the stages random will pick.
