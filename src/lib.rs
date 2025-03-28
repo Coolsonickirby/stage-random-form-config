@@ -21,7 +21,7 @@ enum RuleStageType {
 }
 
 static mut STAGE_IS_RANDOM: [bool; 3] = [false, false, false];
-pub static mut STAGE_TABLE: Lazy<StageTable> = Lazy::new(|| StageTable::new(0x45499AC, 0x16B));
+pub static mut STAGE_TABLE: Lazy<StageTable> = Lazy::new(|| StageTable::new(0x45499C0, 0x16B));
 pub static mut MAPPED_STAGE_NUM_TO_KIND_ID: Lazy<HashMap<u32, HashMap<StageKind, u32>>> = Lazy::new(|| HashMap::new());
 pub static mut STAGE_PARAM_CONFIG_DATA: Lazy<DataConfig> = Lazy::new(|| DataConfig(HashMap::new()));
 
