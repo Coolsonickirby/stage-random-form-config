@@ -21,18 +21,18 @@ enum RuleStageType {
 }
 
 static mut STAGE_IS_RANDOM: [bool; 3] = [false, false, false];
-pub static mut STAGE_TABLE: Lazy<StageTable> = Lazy::new(|| StageTable::new(0x4548938, 0x16B));
+pub static mut STAGE_TABLE: Lazy<StageTable> = Lazy::new(|| StageTable::new(0x45499AC, 0x16B));
 pub static mut MAPPED_STAGE_NUM_TO_KIND_ID: Lazy<HashMap<u32, HashMap<StageKind, u32>>> = Lazy::new(|| HashMap::new());
 pub static mut STAGE_PARAM_CONFIG_DATA: Lazy<DataConfig> = Lazy::new(|| DataConfig(HashMap::new()));
 
-#[skyline::hook(offset = 0x1849ba8, inline)]
+#[skyline::hook(offset = 0x184a698, inline)]
 unsafe fn set_selected_stage_hash(ctx: &InlineCtx) {
     let stage_placement_id = *ctx.registers[23].w.as_ref();
     let ui_stage_hash = *ctx.registers[8].x.as_ref() & 0xFFFFFFFFFF;
     STAGE_IS_RANDOM[stage_placement_id as usize] = ui_stage_hash == 0x0f1f1e484c;
 }
 
-#[skyline::hook(offset = 0x1792f1c, inline)]
+#[skyline::hook(offset = 0x17939ec, inline)]
 unsafe fn check_selection_type(ctx: &InlineCtx) {
     let selection_type = *ctx.registers[21].w.as_ref();
     if selection_type == RuleStageType::Random as u32 {
@@ -47,7 +47,7 @@ unsafe fn check_selection_type(ctx: &InlineCtx) {
 }
 
 // Original plan, but HDR hooks the same exact location apparently so it conflicts with that
-// #[skyline::hook(offset = 0x178a090)]
+// #[skyline::hook(offset = 0x178ab60)]
 // unsafe fn setup_stage(
 //     stage_morph_id: u64,
 //     mut stage_id: u32,
@@ -92,7 +92,7 @@ unsafe fn check_selection_type(ctx: &InlineCtx) {
 // }
 
 // Inline context hook instead to avoid the place HDR hooks
-#[skyline::hook(offset = 0x178a090 + (4 * 5), inline)]
+#[skyline::hook(offset = 0x178ab60 + (4 * 5), inline)]
 unsafe fn setup_stage_offseted(
     ctx: &mut InlineCtx
     // stage_morph_id: u64, -> $x0
